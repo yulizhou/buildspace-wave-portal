@@ -39,7 +39,7 @@ const App = () => {
             address: from,
             timestamp: new Date(timestamp * 1000),
             message: message
-          }]);
+          }].reverse());
         });
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -139,9 +139,6 @@ const wave = async () => {
     checkIfWalletIsConnected();
   }, [])
 
-  const handleMessageChange = (e) => {
-    setMessage(e.target.value);
-  };
   
 return (
     <div className="mainContainer">
@@ -156,7 +153,14 @@ return (
           <p>Notice: 3min interval or you'll be rejected</p>
         </div>
 
-        <textarea placeholder="Gift me here or whatever you want to say" value={message} onChange={handleMessageChange} />
+        {
+          currentAccount ? (<textarea name="textbox"
+            placeholder="Gift me here or whatever you want to say"
+            type="text"
+            id="msg"
+            value={message}
+            onChange={e => setMessage(e.target.value)} />) : null
+        }
 
 
         <button className="waveButton" onClick={wave}>
